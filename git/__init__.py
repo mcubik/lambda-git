@@ -38,7 +38,7 @@ def exec_command(*args, **kwargs):
     options = dict({'cwd': '/tmp', 'env': os.environ}, **kwargs)
     command = ['git'] + list(args)
     LOGGER.info('executing git command: "{}"'.format(' '.join(command)))
-    p = subprocess.Popen(command, stdout=subprocess.PIPE,
+    p = subprocess.Popen(command, stdout=options['stdout'] or subprocess.PIPE,
                          stderr=subprocess.PIPE, cwd=options['cwd'],
                          env=options['env'])
     stdout, stderr = p.communicate()
